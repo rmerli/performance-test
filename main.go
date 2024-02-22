@@ -42,7 +42,7 @@ func main() {
 		r.Header.Add("Authorization", token)
 	})
 
-	sendReq(client, &queries.GetProduct, "GetProduct", nil, false)
+	sendReq(client, &queries.GetProducts, "GetProduct", nil, false)
 
 	sendReq(client, &queries.GetClientCompanies, "GetCompanies", nil, false)
 
@@ -70,8 +70,8 @@ func main() {
 
 	variables = map[string]interface{}{
 		"products_product_id_list": []string{
-			string(queries.GetProduct.Products.Edges[len(queries.GetProduct.Products.Edges)-1].Node.Id),
-			string(queries.GetProduct.Products.Edges[len(queries.GetProduct.Products.Edges)-2].Node.Id),
+			string(queries.GetProducts.Products.Edges[len(queries.GetProducts.Products.Edges)-1].Node.Id),
+			string(queries.GetProducts.Products.Edges[len(queries.GetProducts.Products.Edges)-2].Node.Id),
 		},
 		"status_list": []string{
 			string(queries.GetClientCompanies.ClientCompanies.Collection[len(queries.GetClientCompanies.ClientCompanies.Collection)-1].Status),

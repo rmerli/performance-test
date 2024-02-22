@@ -2,7 +2,7 @@ package queries
 
 import "github.com/hasura/go-graphql-client"
 
-var GetProduct struct {
+var GetProducts struct {
 	Products struct {
 		Edges []struct {
 			Node struct {
