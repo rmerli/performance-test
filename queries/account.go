@@ -245,3 +245,37 @@ var GetAccount struct {
 		}
 	} `graphql:"account(id: $id)"`
 }
+
+var GetAdditionalSAData struct {
+	Account struct {
+		AppointedSustainabilityAdvisorProducts struct {
+			Edges []struct {
+				Node struct {
+					Product struct {
+						Id           graphql.ID     `graphql:"id"`
+						Abbreviation graphql.String `graphql:"abbreviation"`
+						Name         graphql.String `graphql:"name"`
+					} `graphql:"product"`
+					ClientCompany struct {
+						Id        graphql.ID     `graphql:"id"`
+						LegalName graphql.String `graphql:"legalName"`
+					} `graphql:"clientCompany"`
+				} `graphql:"node"`
+			} `graphql:"edges"`
+		} `graphql:"appointedSustainabilityAdvisorProducts"`
+		SustainabilityAdvisorProducts struct {
+			Edges []struct {
+				Node struct {
+					Id               graphql.ID      `graphql:"id"`
+					IsProductManager graphql.Boolean `graphql:"isProductManager"`
+					Product          struct {
+						Id           graphql.ID     `graphql:"id"`
+						Abbreviation graphql.String `graphql:"abbreviation"`
+						Name         graphql.String `graphql:"name"`
+					} `graphql:"product"`
+				} `graphql:"node"`
+			} `graphql:"edges"`
+		} `graphql:"sustainabilityAdvisorProducts"`
+		IsCopywriter graphql.Boolean `graphql:"isCopywriter"`
+	} `graphql:"account(id: $id)"`
+}

@@ -399,3 +399,102 @@ var GetSubEntityBsupp struct {
 		} `graphql:"zohoAccount"`
 	} `graphql:"subEntity(id: $id)"`
 }
+
+var GetZohoAccounts struct {
+	ZohoAccounts struct {
+		PaginationInfo struct {
+			ItemsPerPage graphql.Int `graphql:"itemsPerPage"`
+			LastPage     graphql.Int `graphql:"lastPage"`
+			TotalCount   graphql.Int `graphql:"totalCount"`
+		} `graphql:"paginationInfo"`
+		Collection []struct {
+			Id   graphql.ID     `graphql:"id"`
+			Name graphql.String `graphql:"name"`
+		} `graphql:"collection"`
+	} `graphql:"zohoAccounts(page: $page, itemsPerPage: $itemsPerPage, order: { name: $order })"`
+}
+
+var GetSharedWithCompanies struct {
+	ClientCompanies struct {
+		PaginationInfo struct {
+			TotalCount graphql.Int `graphql:"totalCount"`
+		} `graphql:"paginationInfo"`
+		Collection []struct {
+			Id        graphql.ID     `graphql:"id"`
+			LegalName graphql.String `graphql:"legalName"`
+		} `graphql:"collection"`
+	} `graphql:"clientCompanies(products_product_id: $product, status_list: $status_list, itemsPerPage: $itemsPerPage, client: $client)"`
+}
+
+var GetClientViewCompanies struct {
+	ClientCompanies struct {
+		PaginationInfo struct {
+			TotalCount graphql.Int `graphql:"totalCount"`
+			LastPage   graphql.Int `graphql:"lastPage"`
+		} `graphql:"paginationInfo"`
+		Collection []struct {
+			Id        graphql.ID     `graphql:"id"`
+			LegalName graphql.String `graphql:"legalName"`
+			Products  struct {
+				Edges []struct {
+					Node struct {
+						Product struct {
+							Name         graphql.String `graphql:"name"`
+							Abbreviation graphql.String `graphql:"abbreviation"`
+							Id           graphql.ID     `graphql:"id"`
+						} `graphql:"product"`
+						AllowedModules struct {
+							Edges []struct {
+								Node struct {
+									Id   graphql.ID     `graphql:"id"`
+									Name graphql.String `graphql:"name"`
+									Slug graphql.String `graphql:"slug"`
+								} `graphql:"node"`
+							} `graphql:"edges"`
+						} `graphql:"allowedModules"`
+					} `graphql:"node"`
+				} `graphql:"edges"`
+			} `graphql:"products"`
+		} `graphql:"collection"`
+	} `graphql:"clientCompanies(client: $client, products_product_id: $product, status_list: $status_list, itemsPerPage: $itemsPerPage, module: $module, page: $page, primarySubEntity_legalName: $search)"`
+}
+
+var GetClientName struct {
+	ClientCompanies struct {
+		PaginationInfo struct {
+			ItemsPerPage graphql.Int `graphql:"itemsPerPage"`
+			LastPage     graphql.Int `graphql:"lastPage"`
+			TotalCount   graphql.Int `graphql:"totalCount"`
+		} `graphql:"paginationInfo"`
+		Collection []struct {
+			Id        graphql.ID     `graphql:"id"`
+			LegalName graphql.String `graphql:"legalName"`
+		} `graphql:"collection"`
+	} `graphql:"clientCompanies(products_product_id: $product, status_list: $status_list, itemsPerPage: $itemsPerPage, primarySubEntity_legalName: $search, page: $page, client: $client)"`
+}
+
+var GetAllClientCompanies struct {
+	ClientCompanies struct {
+		PaginationInfo struct {
+			LastPage     graphql.Int `graphql:"lastPage"`
+			TotalCount   graphql.Int `graphql:"totalCount"`
+			ItemsPerPage graphql.Int `graphql:"itemsPerPage"`
+		} `graphql:"paginationInfo"`
+		Collection []struct {
+			Id        graphql.ID     `graphql:"id"`
+			Status    graphql.String `graphql:"status"`
+			LegalName graphql.String `graphql:"legalName"`
+			Products  struct {
+				Edges []struct {
+					Node struct {
+						Product struct {
+							Name         graphql.String `graphql:"name"`
+							Abbreviation graphql.String `graphql:"abbreviation"`
+							Id           graphql.ID     `graphql:"id"`
+						} `graphql:"product"`
+					} `graphql:"node"`
+				} `graphql:"edges"`
+			} `graphql:"products"`
+		} `graphql:"collection"`
+	} `graphql:"clientCompanies(status_list: $status_list, page: $page, itemsPerPage: $itemsPerPage, primarySubEntity_legalName: $search, client: $client)"`
+}
