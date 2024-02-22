@@ -26,5 +26,4 @@ func (c Client) SendAccountRequests() {
 		"id": graphql.String("your_account_id_here"),
 	}
 	c.SendAsync(&queries.GetAdditionalSAData, "GetAdditionalSAData", variables)
-
 }
