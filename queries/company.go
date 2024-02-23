@@ -456,7 +456,7 @@ var GetClientViewCompanies struct {
 				} `graphql:"edges"`
 			} `graphql:"products"`
 		} `graphql:"collection"`
-	} `graphql:"clientCompanies(client: $client, products_product_id: $product, status_list: $status_list, itemsPerPage: $itemsPerPage, module: $module, page: $page, primarySubEntity_legalName: $search)"`
+	} `graphql:"clientCompanies(client: $client, products_product_id: $product itemsPerPage: $itemsPerPage page: $page)"`
 }
 
 var GetClientName struct {
@@ -470,7 +470,7 @@ var GetClientName struct {
 			Id        graphql.ID     `graphql:"id"`
 			LegalName graphql.String `graphql:"legalName"`
 		} `graphql:"collection"`
-	} `graphql:"clientCompanies(products_product_id: $product, status_list: $status_list, itemsPerPage: $itemsPerPage, primarySubEntity_legalName: $search, page: $page, client: $client)"`
+	} `graphql:"clientCompanies(products_product_id: $product, itemsPerPage: $itemsPerPage, page: $page, client: $client)"`
 }
 
 var GetAllClientCompanies struct {
@@ -496,5 +496,5 @@ var GetAllClientCompanies struct {
 				} `graphql:"edges"`
 			} `graphql:"products"`
 		} `graphql:"collection"`
-	} `graphql:"clientCompanies(status_list: $status_list, page: $page, itemsPerPage: $itemsPerPage, primarySubEntity_legalName: $search, client: $client)"`
+	} `graphql:"clientCompanies(page: $page, itemsPerPage: $itemsPerPage)"`
 }

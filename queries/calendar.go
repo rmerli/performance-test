@@ -22,8 +22,8 @@ var CalendarEvents struct {
 			Id                        graphql.ID     `graphql:"id"`
 			Summary                   graphql.String `graphql:"summary"`
 			Description               graphql.String `graphql:"description"`
-			StartDateTime             graphql.String `graphql:"startDateTime"`
-			EndDateTime               graphql.String `graphql:"endDateTime"`
+			StartDateTime             graphql.Int    `graphql:"startDateTime"`
+			EndDateTime               graphql.Int    `graphql:"endDateTime"`
 			GoogleEventLink           graphql.String `graphql:"googleEventLink"`
 			GoogleCancelEventLink     graphql.String `graphql:"googleCancelEventLink"`
 			GoogleRescheduleEventLink graphql.String `graphql:"googleRescheduleEventLink"`
@@ -40,7 +40,7 @@ var CalendarEvents struct {
 				}
 			} `graphql:"attendees(itemsPerPage: 50)"`
 		}
-	} `graphql:"calendarEvents(page: $page, eventDate: $eventDate, itemsPerPage: $perPage, dateRange: $dateRange)"`
+	} `graphql:"calendarEvents(page: $page, itemsPerPage: $perPage)"`
 }
 
 var CalendarEventsForCR struct {
@@ -85,8 +85,8 @@ var AppEvents struct {
 			Id            graphql.ID     `graphql:"id"`
 			Title         graphql.String `graphql:"title"`
 			Description   graphql.String `graphql:"description"`
-			StartDateTime graphql.String `graphql:"startDateTime"`
-			EndDateTime   graphql.String `graphql:"endDateTime"`
+			StartDateTime graphql.Int    `graphql:"startDateTime"`
+			EndDateTime   graphql.Int    `graphql:"endDateTime"`
 			CreatedBy     struct {
 				Id         graphql.ID     `graphql:"id"`
 				FirstName  graphql.String `graphql:"firstName"`
@@ -107,7 +107,7 @@ var AppEvents struct {
 				}
 			} `graphql:"sharedWith"`
 		}
-	} `graphql:"inAppEvents(eventDate: $eventDate, page: $page)"`
+	} `graphql:"inAppEvents(page: $page)"`
 }
 
 var AppEventsForCR struct {

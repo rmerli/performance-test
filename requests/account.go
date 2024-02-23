@@ -23,7 +23,7 @@ func (c Client) SendAccountRequests() {
 	c.SendAsync(&queries.GetUsers, "GetUsers", variables)
 
 	variables = map[string]interface{}{
-		"id": graphql.String("your_account_id_here"),
+		"id": graphql.ID(mutations.StartAuth.StartAuthentication.Authentication.Account.Id),
 	}
 	c.SendAsync(&queries.GetAdditionalSAData, "GetAdditionalSAData", variables)
 }

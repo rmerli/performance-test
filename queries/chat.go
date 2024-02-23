@@ -66,7 +66,7 @@ var GetChatsRooms struct {
 				} `graphql:"participants(itemsPerPage: 200)"`
 			}
 		}
-	} `graphql:"chatRooms(participants_firstName: $participants_firstName, participants_lastName: $participants_lastName, last: $last)"`
+	} `graphql:"chatRooms(participants_firstName: $participants_firstName, participants_lastName: $participants_lastName)"`
 }
 
 var GetChatsMessages struct {

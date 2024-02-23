@@ -19,7 +19,7 @@ func (c Client) SendCompanyRequests() {
 		"itemsPerPage": graphql.Int(500),
 		"page":         graphql.Int(1),
 	}
-	c.SendAsync(&queries.GetClientCompaniesFilteredByProduct, "GetCompanyFilterByProduct", variables)
+	c.SendAsync(&queries.GetClientCompaniesFilteredByProduct, "GetClientCompaniesFilteredByProduct", variables)
 
 	variables = map[string]interface{}{
 		"id": queries.GetClientCompanies.ClientCompanies.Collection[len(queries.GetClientCompanies.ClientCompanies.Collection)-1].Id,
@@ -60,7 +60,7 @@ func (c Client) SendCompanyRequests() {
 	c.SendAsync(&queries.GetZohoAccounts, "GetZohoAccounts", variables)
 
 	variables = map[string]interface{}{
-		"product":      graphql.String(""),
+		"product":      graphql.String(queries.GetProducts.Products.Edges[len(queries.GetProducts.Products.Edges)-1].Node.Id),
 		"status_list":  []graphql.String{},
 		"itemsPerPage": graphql.Int(500),
 		"client":       graphql.String(""),
@@ -68,33 +68,24 @@ func (c Client) SendCompanyRequests() {
 	c.SendAsync(&queries.GetSharedWithCompanies, "GetSharedWithCompanies", variables)
 
 	variables = map[string]interface{}{
-		"client":       graphql.String(""),
-		"product":      graphql.String(""),
-		"status_list":  []graphql.String{},
+		"client":       graphql.String(queries.GetClientCompanies.ClientCompanies.Collection[len(queries.GetClientCompanies.ClientCompanies.Collection)-1].Id),
+		"product":      graphql.String(queries.GetProducts.Products.Edges[len(queries.GetProducts.Products.Edges)-1].Node.Id),
 		"itemsPerPage": graphql.Int(500),
-		"module":       graphql.String(""),
 		"page":         graphql.Int(1),
-		"search":       graphql.String(""),
 	}
 	c.SendAsync(&queries.GetClientViewCompanies, "GetClientViewCompanies", variables)
 
 	variables = map[string]interface{}{
-		"product":      graphql.String(""),
-		"status_list":  []graphql.String{},
+		"product":      graphql.String(queries.GetProducts.Products.Edges[len(queries.GetProducts.Products.Edges)-1].Node.Id),
 		"itemsPerPage": graphql.Int(500),
-		"search":       graphql.String(""),
 		"page":         graphql.Int(1),
-		"client":       graphql.String(""),
+		"client":       graphql.String(queries.GetClientCompanies.ClientCompanies.Collection[len(queries.GetClientCompanies.ClientCompanies.Collection)-1].Id),
 	}
 	c.SendAsync(&queries.GetClientName, "GetClientName", variables)
 
 	variables = map[string]interface{}{
-		"status_list":  []string{},
 		"page":         graphql.Int(1),
 		"itemsPerPage": graphql.Int(10),
-		"search":       graphql.String(""),
-		"client":       graphql.String(""),
 	}
 	c.SendAsync(&queries.GetAllClientCompanies, "GetAllClientCompanies", variables)
-
 }

@@ -115,7 +115,7 @@ var GetAllProductDocuments struct {
 				} `graphql:"paginationInfo"`
 			} `graphql:"sharedWith"`
 		} `graphql:"collection"`
-	} `graphql:"productDocuments(status: $documentStatus, page: $page, order: { createdAt: $createdAtOrder }, itemsPerPage: $itemsPerPage)"`
+	} `graphql:"productDocuments(page: $page, order: { createdAt: $createdAtOrder }, itemsPerPage: $itemsPerPage)"`
 }
 
 var GetProductCategoriesForCR struct {
@@ -161,7 +161,7 @@ var GetProductCategoriesForCR struct {
 							Name graphql.String `graphql:"name"`
 						} `graphql:"productDocumentCategory"`
 					} `graphql:"collection"`
-				} `graphql:"productDocuments(status: $documentStatus, page: $page, itemsPerPage: $itemsPerPage, order: { updatedAt: $updatedAtOrder })"`
+				} `graphql:"productDocuments(itemsPerPage: $itemsPerPage, order: { updatedAt: $updatedAtOrder })"`
 			} `graphql:"node"`
 		} `graphql:"edges"`
 		TotalCount graphql.Int `graphql:"totalCount"`

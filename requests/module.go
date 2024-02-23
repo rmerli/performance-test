@@ -11,10 +11,8 @@ func (c Client) SendModuleRequests() {
 	c.SendAsync(&queries.GetModulesWithGroups, "GetModulesWithGroups", nil)
 
 	variables := map[string]interface{}{
-		"id": graphql.ID("your_client_company_id"),
+		"id": graphql.ID(queries.GetClientCompanies.ClientCompanies.Collection[len(queries.GetClientCompanies.ClientCompanies.Collection)-1].Id),
 	}
 	c.SendAsync(&queries.GetClientDashboardGroups, "GetClientDashboardGroups", variables)
-
 	c.SendAsync(&queries.GetDashboardGroups, "GetDashboardGroups", nil)
-
 }

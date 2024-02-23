@@ -71,7 +71,7 @@ var GetClientCategoryDocuments struct {
 					LegalName graphql.String `graphql:"legalName"`
 				} `graphql:"clientCompany"`
 			} `graphql:"collection"`
-		} `graphql:"clientCompanyDocuments(clientCompany: $clientCompany, status: $documentStatus, itemsPerPage: $itemsPerPage, page: $page, order: { updatedAt: $updatedAtOrder })"`
+		} `graphql:"clientCompanyDocuments(clientCompany: $clientCompany, itemsPerPage: $itemsPerPage, page: $page, order: { updatedAt: $updatedAtOrder })"`
 	} `graphql:"clientDocumentCategory(id: $id)"`
 }
 
@@ -102,7 +102,7 @@ var GetProductCategoryDocuments struct {
 					} `graphql:"collection"`
 				} `graphql:"sharedWith"`
 			} `graphql:"collection"`
-		} `graphql:"productDocuments(status: $documentStatus, page: $page)"`
+		} `graphql:"productDocuments"`
 	} `graphql:"productDocumentCategory(id: $id)"`
 }
 
@@ -161,7 +161,7 @@ var GetAllClientsDocuments struct {
 				Name graphql.String `graphql:"name"`
 			} `graphql:"clientDocumentCategory"`
 		} `graphql:"collection"`
-	} `graphql:"clientCompanyDocuments(status: $documentStatus, page: $page, client: $client, clientCompany: $clientCompany, order: { createdAt: $createdAtOrder }, itemsPerPage: $itemsPerPage)"`
+	} `graphql:"clientCompanyDocuments(page: $page, order: { createdAt: $createdAtOrder }, itemsPerPage: $itemsPerPage)"`
 }
 
 var GetClientDocumentAllCategories struct {
@@ -191,7 +191,7 @@ var GetClientDocumentAllCategories struct {
 							Name graphql.String `graphql:"name"`
 						} `graphql:"clientDocumentCategory"`
 					} `graphql:"collection"`
-				} `graphql:"clientCompanyDocuments(status: $documentStatus, itemsPerPage: $itemsPerPage, order: { updatedAt: $updatedAtOrder })"`
+				} `graphql:"clientCompanyDocuments(itemsPerPage: $itemsPerPage, order: { updatedAt: $updatedAtOrder })"`
 			} `graphql:"node"`
 		} `graphql:"edges"`
 	} `graphql:"clientDocumentCategories(clientCompany: $clientCompany)"`
@@ -224,7 +224,7 @@ var GetAllMyDocuments struct {
 							Name graphql.String `graphql:"name"`
 						} `graphql:"clientDocumentCategory"`
 					} `graphql:"collection"`
-				} `graphql:"clientCompanyDocuments(status: $documentStatus, itemsPerPage: $itemsPerPage, order: { updatedAt: $updatedAtOrder })"`
+				} `graphql:"clientCompanyDocuments(itemsPerPage: $itemsPerPage, order: { updatedAt: $updatedAtOrder })"`
 			} `graphql:"node"`
 		} `graphql:"edges"`
 	} `graphql:"clientDocumentCategories(clientCompany: $clientCompany)"`
@@ -255,5 +255,5 @@ var GetAllClientsDeletedDocuments struct {
 			CanBeUpdated graphql.Boolean `graphql:"canBeUpdated"`
 			ContentUrl   graphql.String  `graphql:"contentUrl"`
 		} `graphql:"collection"`
-	} `graphql:"clientCompanyDocuments(status: $documentStatus, page: $page, order: { deletedAt: $deletedAtOrder })"`
+	} `graphql:"clientCompanyDocuments(page: $page, order: { deletedAt: $deletedAtOrder })"`
 }

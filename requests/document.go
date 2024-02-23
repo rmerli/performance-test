@@ -7,34 +7,20 @@ import (
 )
 
 func (c Client) SendDocumentRequests() {
-	variables := map[string]interface{}{
-		"page":           graphql.Int(1),
-		"itemsPerPage":   graphql.Int(10),
-		"updatedAtOrder": graphql.String("DESC"), // Change to "ASC" if needed
-		"createdAtOrder": graphql.String("DESC"), // Change to "ASC" if needed
-	}
-	c.SendAsync(&queries.GetProductCategories, "GetProductCategories", variables)
 
-	variables = map[string]interface{}{
-		"id": graphql.ID("your_product_document_id_here"),
+	variables := map[string]interface{}{
+		"id": graphql.ID(queries.GetAllClientsDocuments.ClientCompanyDocuments.Collection[len(queries.GetAllClientsDocuments.ClientCompanyDocuments.Collection)-1].Id),
 	}
 	c.SendAsync(&queries.GetClientDocumentContentUrl, "GetClientDocumentContentUrl", variables)
 
 	variables = map[string]interface{}{
-		"id": graphql.ID("your_client_document_id_here"),
+		"id": graphql.ID(queries.GetAllProductDocuments.ProductDocuments.Collection[len(queries.GetAllProductDocuments.ProductDocuments.Collection)-1].Id),
 	}
 	c.SendAsync(&queries.GetProductDocumentContentUrl, "GetProductDocumentContentUrl", variables)
 
 	variables = map[string]interface{}{
-		"clientCompany": queries.GetCompany.ClientCompany.Id,
-		"page":          graphql.Int(1),
-	}
-	c.SendAsync(&queries.GetClientDocumentCategories, "GetClientDocumentCategories", variables)
-
-	variables = map[string]interface{}{
-		"clientCompany":  graphql.String("your_client_company_id_here"),
-		"id":             graphql.String("your_client_document_category_id_here"),
-		"documentStatus": graphql.String(""),
+		"clientCompany":  graphql.String(queries.GetCompany.ClientCompany.Id),
+		"id":             graphql.ID(queries.GetClientDocumentCategories.ClientDocumentCategories.Edges[len(queries.GetClientDocumentCategories.ClientDocumentCategories.Edges)-1].Node.Id),
 		"page":           graphql.Int(1),
 		"updatedAtOrder": graphql.String("DESC"), // Change to "ASC" if needed
 		"itemsPerPage":   graphql.Int(10),        // Change as needed
@@ -42,64 +28,32 @@ func (c Client) SendDocumentRequests() {
 	c.SendAsync(&queries.GetClientCategoryDocuments, "GetClientCategoryDocuments", variables)
 
 	variables = map[string]interface{}{
-		"id":             graphql.String("your_product_document_category_id_here"),
-		"documentStatus": graphql.String(""),
-		"page":           graphql.Int(1),
+		"id": graphql.ID(queries.GetProductCategories.ProductDocumentCategories.Edges[len(queries.GetProductCategories.ProductDocumentCategories.Edges)-1].Node.Id),
 	}
 	c.SendAsync(&queries.GetProductCategoryDocuments, "GetProductCategoryDocuments", variables)
 
 	variables = map[string]interface{}{
-		"id":             graphql.String("your_product_document_category_id_here"),
-		"documentStatus": graphql.String(""),
-		"page":           graphql.Int(1),
-	}
-	c.SendAsync(&queries.GetProductCategoryDocumentsForCR, "GetProductCategoryDocumentsForCR", variables)
-
-	variables = map[string]interface{}{
-		"documentStatus": graphql.String(""),
-		"page":           graphql.Int(1),
-		"itemsPerPage":   graphql.Int(10),        // Change as needed
-		"createdAtOrder": graphql.String("DESC"), // Change to "ASC" if needed
-		"client":         graphql.String(""),
-		"clientCompany":  graphql.String(""),
-	}
-	c.SendAsync(&queries.GetAllClientsDocuments, "GetAllClientsDocuments", variables)
-
-	variables = map[string]interface{}{
-		"itemsPerPage":   graphql.Int(15),
-		"documentStatus": graphql.String(""),
-		"page":           graphql.Int(1),
-		"createdAtOrder": graphql.String("DESC"),
-	}
-	c.SendAsync(&queries.GetAllProductDocuments, "GetAllProductDocuments", variables)
-
-	variables = map[string]interface{}{
-		"productId":      graphql.String(""),
-		"documentStatus": graphql.String(""),
-		"page":           graphql.Int(1),
+		"productId":      graphql.String(queries.GetProducts.Products.Edges[len(queries.GetProducts.Products.Edges)-1].Node.Id),
 		"itemsPerPage":   graphql.Int(15),
 		"updatedAtOrder": graphql.String("DESC"),
 	}
 	c.SendAsync(&queries.GetProductCategoriesForCR, "GetProductCategoriesForCR", variables)
 
 	variables = map[string]interface{}{
-		"clientCompany":  graphql.String(""),
-		"documentStatus": graphql.String(""),
+		"clientCompany":  graphql.String(queries.GetClientCompanies.ClientCompanies.Collection[len(queries.GetClientCompanies.ClientCompanies.Collection)-1].Id),
 		"updatedAtOrder": graphql.String("DESC"),
 		"itemsPerPage":   graphql.Int(5),
 	}
 	c.SendAsync(&queries.GetClientDocumentAllCategories, "GetClientDocumentAllCategories", variables)
 
 	variables = map[string]interface{}{
-		"clientCompany":  graphql.String(""),
-		"documentStatus": graphql.String(""),
+		"clientCompany":  graphql.String(queries.GetClientCompanies.ClientCompanies.Collection[len(queries.GetClientCompanies.ClientCompanies.Collection)-1].Id),
 		"updatedAtOrder": graphql.String("DESC"),
 		"itemsPerPage":   graphql.Int(5),
 	}
 	c.SendAsync(&queries.GetAllMyDocuments, "GetAllMyDocuments", variables)
 
 	variables = map[string]interface{}{
-		"documentStatus": graphql.String(""),
 		"page":           graphql.Int(1),
 		"deletedAtOrder": graphql.String("DESC"),
 	}
